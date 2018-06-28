@@ -25,6 +25,7 @@ package docs
 import (
 	"reflect"
 	"testing"
+	"time"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
@@ -99,6 +100,34 @@ func TestCreateOptionDescription(t *testing.T) {
 				Type:        "[]bool",
 			},
 			ExpectedName: "bs_2",
+		},
+		// Duration
+		{
+			Flag: buildFlag(func(fs *pflag.FlagSet) { fs.Duration("dur_1", time.Hour, "Usage of dur_1") }),
+			Expected: OptionDescription{
+				Default:     time.Hour,
+				Description: "Usage of dur_1",
+				Type:        "duration",
+			},
+			ExpectedName: "dur_1",
+		},
+		{
+			Flag: buildFlag(func(fs *pflag.FlagSet) { fs.Duration("dur_2", 0, "Usage of dur_2") }),
+			Expected: OptionDescription{
+				Default:     time.Duration(0),
+				Description: "Usage of dur_2",
+				Type:        "duration",
+			},
+			ExpectedName: "dur_2",
+		},
+		{
+			Flag: buildFlag(func(fs *pflag.FlagSet) { fs.DurationP("dur_3", "x", time.Second, "Usage of dur_3") }),
+			Expected: OptionDescription{
+				Default:     time.Second,
+				Description: "Usage of dur_3",
+				Type:        "duration",
+			},
+			ExpectedName: "dur_3",
 		},
 		// Ints
 		{

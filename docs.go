@@ -61,6 +61,7 @@ var (
 	convFuncs = map[string]convFunc{
 		"bool":        func(fs *pflag.FlagSet, name string) (interface{}, error) { return fs.GetBool(name) },
 		"boolSlice":   func(fs *pflag.FlagSet, name string) (interface{}, error) { return fs.GetBoolSlice(name) },
+		"duration":    func(fs *pflag.FlagSet, name string) (interface{}, error) { return fs.GetDuration(name) },
 		"int":         func(fs *pflag.FlagSet, name string) (interface{}, error) { return fs.GetInt(name) },
 		"intSlice":    func(fs *pflag.FlagSet, name string) (interface{}, error) { return fs.GetIntSlice(name) },
 		"int32":       func(fs *pflag.FlagSet, name string) (interface{}, error) { return fs.GetInt32(name) },
